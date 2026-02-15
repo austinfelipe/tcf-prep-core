@@ -1,9 +1,11 @@
 'use client';
 
+import { useRef } from 'react';
 import { useProgress } from '@/hooks/useProgress';
 import { LEVELS } from '@/data/levels';
 import { getVerbsByIds } from '@/data/conjugations';
 import { getLevelCompletionPercent } from '@/lib/mastery';
+import { exportProgress, parseProgressFile } from '@/lib/storage';
 import { Header } from '@/components/layout/Header';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -12,7 +14,8 @@ import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 
 export default function HomePage() {
-  const { progress, isLoaded, resetAll } = useProgress();
+  const { progress, isLoaded, resetAll, importProgress } = useProgress();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!isLoaded || !progress) {
     return (
@@ -92,7 +95,37 @@ export default function HomePage() {
           })}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-10 flex items-center justify-center gap-2">
+          <Button variant="ghost" size="sm" onClick={() => exportProgress()}>
+            Export
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            Import
+          </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json"
+            className="hidden"
+            data-testid="import-file-input"
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+              try {
+                const incoming = await parseProgressFile(file);
+                if (window.confirm('Import this progress file? This will replace your current progress.')) {
+                  importProgress(incoming);
+                }
+              } catch (err) {
+                alert(err instanceof Error ? err.message : 'Invalid progress file.');
+              }
+              e.target.value = '';
+            }}
+          />
           <Button
             variant="ghost"
             size="sm"

@@ -85,3 +85,66 @@ export function unlockLevel(progress: UserProgress, levelId: LevelId): UserProgr
   updated.levels[levelId].unlocked = true;
   return updated;
 }
+
+export function exportProgress(): void {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  const data = raw ?? JSON.stringify(createDefaultProgress());
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'tcf-prep-progress.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+const LEVEL_KEYS: LevelId[] = ['a1', 'a2', 'b1', 'b2'];
+
+export async function parseProgressFile(file: File): Promise<UserProgress> {
+  const text = await file.text();
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    throw new Error('File is not valid JSON.');
+  }
+
+  if (typeof parsed !== 'object' || parsed === null) {
+    throw new Error('File does not contain a valid progress object.');
+  }
+
+  const obj = parsed as Record<string, unknown>;
+
+  if (obj.version !== PROGRESS_VERSION) {
+    throw new Error(`Unsupported progress version. Expected ${PROGRESS_VERSION}.`);
+  }
+
+  if (typeof obj.levels !== 'object' || obj.levels === null) {
+    throw new Error('Missing levels data.');
+  }
+
+  const levels = obj.levels as Record<string, unknown>;
+  for (const key of LEVEL_KEYS) {
+    if (typeof levels[key] !== 'object' || levels[key] === null) {
+      throw new Error(`Missing level "${key}".`);
+    }
+    const level = levels[key] as Record<string, unknown>;
+    if (typeof level.unlocked !== 'boolean') {
+      throw new Error(`Level "${key}" missing "unlocked".`);
+    }
+    if (typeof level.verbMastery !== 'object' || level.verbMastery === null) {
+      throw new Error(`Level "${key}" missing "verbMastery".`);
+    }
+    if (!Array.isArray(level.testAttempts)) {
+      throw new Error(`Level "${key}" missing "testAttempts".`);
+    }
+    if (typeof level.testPassed !== 'boolean') {
+      throw new Error(`Level "${key}" missing "testPassed".`);
+    }
+  }
+
+  return parsed as UserProgress;
+}

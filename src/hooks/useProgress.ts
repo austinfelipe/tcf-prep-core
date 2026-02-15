@@ -61,6 +61,11 @@ export function useProgress() {
     setProgress(createDefaultProgress());
   }, []);
 
+  const importProgress = useCallback((incoming: UserProgress) => {
+    saveProgress(incoming);
+    setProgress(incoming);
+  }, []);
+
   return {
     progress,
     isLoaded: progress !== null,
@@ -68,5 +73,6 @@ export function useProgress() {
     recordTestAttempt,
     unlock,
     resetAll,
+    importProgress,
   };
 }
