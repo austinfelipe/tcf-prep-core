@@ -8,8 +8,8 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "TCF Prep – French Conjugation Practice",
-  description: "Master French verb conjugations to prepare for the TCF exam",
+  title: "TCF Prep – French Conjugation & Writing Practice",
+  description: "Master French verb conjugations and practice expression écrite to prepare for the TCF exam",
 };
 
 export default function RootLayout({
