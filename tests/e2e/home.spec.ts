@@ -22,13 +22,13 @@ test.describe('Home page', () => {
     const lockedBadges = page.getByText('Locked');
     await expect(lockedBadges).toHaveCount(3);
 
-    const a1Link = page.getByRole('link', { name: /A1/ });
+    const a1Link = page.locator('a[href="/level/a1"]');
     await expect(a1Link).toBeVisible();
     await expect(a1Link).not.toHaveClass(/pointer-events-none/);
   });
 
   test('clicking A1 navigates to /level/a1', async ({ page }) => {
-    await page.getByRole('link', { name: /A1/ }).click();
+    await page.locator('a[href="/level/a1"]').click();
     await expect(page).toHaveURL(/\/level\/a1/);
   });
 
