@@ -2,17 +2,37 @@ import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit } from '@/lib/rateLimit';
 import { improveWriting } from '@/lib/openai';
 import { WritingTaskId } from '@/types/writing';
+import { createClient } from '@/lib/supabase/server';
 
 const VALID_TASK_IDS: WritingTaskId[] = [1, 2, 3];
 
 export async function POST(request: NextRequest) {
-  // Rate limiting
-  const ip =
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    request.headers.get('x-real-ip') ??
-    'unknown';
+  // Auth + PRO check
+  const supabase = await createClient();
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-  const { allowed, remaining } = checkRateLimit(ip);
+  if (authError || !user) {
+    return NextResponse.json(
+      { success: false, error: 'Authentification requise' },
+      { status: 401 }
+    );
+  }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_pro')
+    .eq('id', user.id)
+    .single();
+
+  if (!profile?.is_pro) {
+    return NextResponse.json(
+      { success: false, error: 'Abonnement PRO requis' },
+      { status: 403 }
+    );
+  }
+
+  // Rate limiting (by user ID)
+  const { allowed, remaining } = checkRateLimit(user.id);
   if (!allowed) {
     return NextResponse.json(
       { success: false, error: 'Limite de requêtes atteinte. Réessayez dans une heure.' },

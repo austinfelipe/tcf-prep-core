@@ -1,5 +1,5 @@
 const WINDOW_MS = 60 * 60 * 1000; // 1 hour
-const MAX_REQUESTS = 5;
+const MAX_REQUESTS = 20; // PRO users get 20 requests/hour
 
 interface RateLimitEntry {
   timestamps: number[];
@@ -18,11 +18,11 @@ function cleanup() {
   }
 }
 
-export function checkRateLimit(ip: string): { allowed: boolean; remaining: number } {
+export function checkRateLimit(key: string): { allowed: boolean; remaining: number } {
   cleanup();
 
   const now = Date.now();
-  const entry = store.get(ip) ?? { timestamps: [] };
+  const entry = store.get(key) ?? { timestamps: [] };
 
   // Filter to window
   entry.timestamps = entry.timestamps.filter((t) => now - t < WINDOW_MS);
@@ -32,7 +32,7 @@ export function checkRateLimit(ip: string): { allowed: boolean; remaining: numbe
   }
 
   entry.timestamps.push(now);
-  store.set(ip, entry);
+  store.set(key, entry);
 
   return { allowed: true, remaining: MAX_REQUESTS - entry.timestamps.length };
 }

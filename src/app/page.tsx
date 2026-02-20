@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import { useAuth } from '@/hooks/useAuth';
 import { useProgress } from '@/hooks/useProgress';
 import { LEVELS } from '@/data/levels';
 import { getVerbsByIds } from '@/data/conjugations';
@@ -15,6 +16,7 @@ import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 
 export default function HomePage() {
+  const { isPro } = useAuth();
   const { progress, isLoaded, resetAll, importProgress } = useProgress();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -154,9 +156,12 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900">
-                    Expression Ecrite
-                  </h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-gray-900">
+                      Expression Ecrite
+                    </h3>
+                    {!isPro && <Badge variant="warning">PRO</Badge>}
+                  </div>
                   <p className="mt-1 text-sm text-gray-500">
                     Simulez l&apos;épreuve d&apos;expression écrite du TCF : 3 tâches chronométrées avec évaluation par IA
                   </p>
