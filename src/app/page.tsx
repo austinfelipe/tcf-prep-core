@@ -6,6 +6,7 @@ import { LEVELS } from '@/data/levels';
 import { getVerbsByIds } from '@/data/conjugations';
 import { getLevelCompletionPercent } from '@/lib/mastery';
 import { exportProgress, parseProgressFile } from '@/lib/storage';
+import { getReviewSummary, formatStaleness } from '@/lib/review';
 import { Header } from '@/components/layout/Header';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -94,6 +95,53 @@ export default function HomePage() {
             );
           })}
         </div>
+
+        {/* Review */}
+        {(() => {
+          const reviewSummary = getReviewSummary(progress);
+          const hasDue = reviewSummary.dueVerbCount > 0;
+          const hasPracticed = reviewSummary.totalPracticedVerbs > 0;
+
+          return (
+            <div className="mt-8">
+              <Link
+                href={hasDue ? '/review' : '#'}
+                className={!hasDue ? 'pointer-events-none' : ''}
+              >
+                <Card
+                  hoverable={hasDue}
+                  className={!hasDue ? 'opacity-60' : ''}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-purple-100">
+                      <svg className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-gray-900">Review</h3>
+                      <p className="mt-1 text-sm text-gray-500">
+                        {hasPracticed
+                          ? 'Revisit verbs you haven\u2019t practiced in a while'
+                          : 'Practice verbs to unlock review'}
+                      </p>
+                      {hasDue && (
+                        <p className="mt-2 text-xs text-gray-400">
+                          {reviewSummary.dueVerbCount} verb{reviewSummary.dueVerbCount !== 1 ? 's' : ''} due · oldest {formatStaleness(reviewSummary.oldestStalenessMs)} ago
+                        </p>
+                      )}
+                    </div>
+                    <div className="ml-2 mt-1">
+                      <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                      </svg>
+                    </div>
+                  </div>
+                </Card>
+              </Link>
+            </div>
+          );
+        })()}
 
         {/* Expression Ecrite */}
         <div className="mt-8">

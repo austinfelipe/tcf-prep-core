@@ -87,3 +87,30 @@ export interface EvaluateWritingError {
   success: false;
   error: string;
 }
+
+// --- Stored evaluation with original texts ---
+
+export interface StoredEvaluationData {
+  result: WritingEvaluationResult;
+  originalTexts: { taskId: WritingTaskId; prompt: string; text: string }[];
+}
+
+// --- Improve Writing API ---
+
+export interface ImproveWritingRequest {
+  taskId: WritingTaskId;
+  prompt: string;
+  text: string;
+  cefrLevel: string;
+  grammarNotes: GrammarNote[];
+}
+
+export interface ImproveWritingResponse {
+  success: true;
+  improvedText: string;
+}
+
+export interface ImproveWritingError {
+  success: false;
+  error: string;
+}

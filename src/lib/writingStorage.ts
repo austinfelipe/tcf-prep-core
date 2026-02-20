@@ -1,4 +1,9 @@
-import { WritingSessionState, WritingEvaluationResult, WritingTaskId } from '@/types/writing';
+import {
+  WritingSessionState,
+  WritingEvaluationResult,
+  WritingTaskId,
+  StoredEvaluationData,
+} from '@/types/writing';
 import { WRITING_TASKS } from '@/data/writingTasks';
 
 const SESSION_KEY = 'tcf-writing-session';
@@ -59,10 +64,13 @@ export function clearSession(): void {
 
 // --- Evaluation History ---
 
-export function saveEvaluationResult(result: WritingEvaluationResult): void {
+export function saveEvaluationResult(
+  result: WritingEvaluationResult,
+  originalTexts: { taskId: WritingTaskId; prompt: string; text: string }[] = []
+): void {
   try {
     const history = loadEvaluationHistory();
-    history.unshift(result);
+    history.unshift({ result, originalTexts });
     // Keep last 20 results
     const trimmed = history.slice(0, 20);
     localStorage.setItem(HISTORY_KEY, JSON.stringify(trimmed));
@@ -71,17 +79,29 @@ export function saveEvaluationResult(result: WritingEvaluationResult): void {
   }
 }
 
-export function loadEvaluationHistory(): WritingEvaluationResult[] {
+export function loadEvaluationHistory(): StoredEvaluationData[] {
   try {
     const raw = localStorage.getItem(HISTORY_KEY);
     if (!raw) return [];
-    return JSON.parse(raw) as WritingEvaluationResult[];
+    const parsed = JSON.parse(raw) as unknown[];
+    // Backward compat: old entries are raw WritingEvaluationResult without originalTexts
+    return parsed.map((entry) => {
+      const obj = entry as Record<string, unknown>;
+      if ('result' in obj && 'originalTexts' in obj) {
+        return obj as unknown as StoredEvaluationData;
+      }
+      // Legacy format: the entry itself is a WritingEvaluationResult
+      return {
+        result: obj as unknown as WritingEvaluationResult,
+        originalTexts: [],
+      };
+    });
   } catch {
     return [];
   }
 }
 
-export function loadLatestEvaluation(): WritingEvaluationResult | null {
+export function loadLatestEvaluation(): StoredEvaluationData | null {
   const history = loadEvaluationHistory();
   return history[0] ?? null;
 }

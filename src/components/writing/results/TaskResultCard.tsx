@@ -5,15 +5,20 @@ import { TaskEvaluation } from '@/types/writing';
 import { WRITING_TASKS } from '@/data/writingTasks';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
 import { CriteriaScoreChart } from './CriteriaScoreChart';
 import { GrammarAnalysisSection } from './GrammarAnalysisSection';
+import { ImprovedVersionModal } from './ImprovedVersionModal';
 
 interface TaskResultCardProps {
   evaluation: TaskEvaluation;
+  originalText?: string;
+  originalPrompt?: string;
 }
 
-export function TaskResultCard({ evaluation }: TaskResultCardProps) {
+export function TaskResultCard({ evaluation, originalText, originalPrompt }: TaskResultCardProps) {
   const [expanded, setExpanded] = useState(false);
+  const [showImprovedModal, setShowImprovedModal] = useState(false);
   const taskDef = WRITING_TASKS.find((t) => t.id === evaluation.taskId);
 
   return (
@@ -72,6 +77,16 @@ export function TaskResultCard({ evaluation }: TaskResultCardProps) {
           )}
         </div>
 
+        {/* Improved version button */}
+        {originalText && originalPrompt && (
+          <Button
+            variant="secondary"
+            onClick={() => setShowImprovedModal(true)}
+          >
+            Voir la version améliorée
+          </Button>
+        )}
+
         {/* Expandable details */}
         <button
           type="button"
@@ -109,6 +124,17 @@ export function TaskResultCard({ evaluation }: TaskResultCardProps) {
           </div>
         )}
       </div>
+
+      {showImprovedModal && originalText && originalPrompt && (
+        <ImprovedVersionModal
+          taskId={evaluation.taskId}
+          originalText={originalText}
+          originalPrompt={originalPrompt}
+          cefrLevel={evaluation.cefrLevel}
+          grammarNotes={evaluation.grammarNotes}
+          onClose={() => setShowImprovedModal(false)}
+        />
+      )}
     </Card>
   );
 }

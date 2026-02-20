@@ -22,10 +22,10 @@ export function WritingLanding() {
 
     const evalHistory = loadEvaluationHistory();
     setHistory(
-      evalHistory.map((r) => ({
-        cefrLevel: r.overallCefrLevel,
-        score: r.overallScore,
-        date: r.evaluatedAt,
+      evalHistory.map((entry) => ({
+        cefrLevel: entry.result.overallCefrLevel,
+        score: entry.result.overallScore,
+        date: entry.result.evaluatedAt,
       }))
     );
     setIsLoaded(true);

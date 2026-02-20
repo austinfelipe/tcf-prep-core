@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   WritingEvaluationResult,
+  WritingTaskId,
   EvaluateWritingResponse,
   EvaluateWritingError,
 } from '@/types/writing';
@@ -17,9 +18,16 @@ import { OverallScoreBanner } from './OverallScoreBanner';
 import { TaskResultCard } from './TaskResultCard';
 import { Button } from '@/components/ui/Button';
 
+interface OriginalText {
+  taskId: WritingTaskId;
+  prompt: string;
+  text: string;
+}
+
 export function WritingResults() {
   const router = useRouter();
   const [result, setResult] = useState<WritingEvaluationResult | null>(null);
+  const [originalTexts, setOriginalTexts] = useState<OriginalText[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +40,8 @@ export function WritingResults() {
         // No pending evaluation — try to show the latest result
         const latest = loadLatestEvaluation();
         if (latest) {
-          setResult(latest);
+          setResult(latest.result);
+          setOriginalTexts(latest.originalTexts);
           setLoading(false);
           return;
         }
@@ -44,6 +53,15 @@ export function WritingResults() {
       // Parse pending data and call API
       try {
         const pending = JSON.parse(pendingRaw);
+        // Preserve original texts before clearing
+        const savedOriginalTexts: OriginalText[] = Array.isArray(pending.tasks)
+          ? pending.tasks.map((t: { taskId: WritingTaskId; prompt: string; text: string }) => ({
+              taskId: t.taskId,
+              prompt: t.prompt,
+              text: t.text,
+            }))
+          : [];
+
         localStorage.removeItem('tcf-writing-pending-evaluation');
 
         const response = await fetch('/api/evaluate-writing', {
@@ -65,9 +83,10 @@ export function WritingResults() {
         }
 
         const evalResult = (data as EvaluateWritingResponse).result;
-        saveEvaluationResult(evalResult);
+        saveEvaluationResult(evalResult, savedOriginalTexts);
         clearSession();
         setResult(evalResult);
+        setOriginalTexts(savedOriginalTexts);
       } catch {
         setError("Erreur réseau. Veuillez vérifier votre connexion et réessayer.");
       }
@@ -103,9 +122,17 @@ export function WritingResults() {
       />
 
       <div className="space-y-4">
-        {result.tasks.map((taskEval) => (
-          <TaskResultCard key={taskEval.taskId} evaluation={taskEval} />
-        ))}
+        {result.tasks.map((taskEval) => {
+          const orig = originalTexts.find((o) => o.taskId === taskEval.taskId);
+          return (
+            <TaskResultCard
+              key={taskEval.taskId}
+              evaluation={taskEval}
+              originalText={orig?.text}
+              originalPrompt={orig?.prompt}
+            />
+          );
+        })}
       </div>
 
       <div className="flex gap-3">

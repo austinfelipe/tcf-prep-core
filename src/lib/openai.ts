@@ -1,6 +1,10 @@
 import OpenAI from 'openai';
-import { TaskEvaluation, WritingEvaluationResult } from '@/types/writing';
+import { TaskEvaluation, WritingEvaluationResult, GrammarNote } from '@/types/writing';
 import { buildSystemPrompt, buildUserPrompt } from './evaluationPrompt';
+import {
+  buildImprovementSystemPrompt,
+  buildImprovementUserPrompt,
+} from './improvementPrompt';
 
 function getClient(): OpenAI {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -103,4 +107,33 @@ export async function evaluateWriting(
     overallScore: Math.round(overallScore * 10) / 10,
     tasks: taskResults,
   };
+}
+
+export async function improveWriting(
+  text: string,
+  prompt: string,
+  cefrLevel: string,
+  grammarNotes: GrammarNote[]
+): Promise<string> {
+  const client = getClient();
+
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o',
+    temperature: 0.4,
+    max_tokens: 2000,
+    messages: [
+      { role: 'system', content: buildImprovementSystemPrompt() },
+      {
+        role: 'user',
+        content: buildImprovementUserPrompt(text, prompt, cefrLevel, grammarNotes),
+      },
+    ],
+  });
+
+  const content = response.choices[0]?.message?.content;
+  if (!content) {
+    throw new Error('Empty response from OpenAI');
+  }
+
+  return content.trim();
 }

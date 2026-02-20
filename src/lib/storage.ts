@@ -73,8 +73,10 @@ export function updateVerbCombo(
   };
 
   combo.totalAttempts += 1;
-  if (correct) combo.correctCount += 1;
-  combo.lastPracticed = Date.now();
+  if (correct) {
+    combo.correctCount += 1;
+    combo.lastPracticed = Date.now();
+  }
 
   level.verbMastery[verbId][comboKey] = combo;
   return updated;
