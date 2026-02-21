@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { WRITING_TASKS } from '@/data/writingTasks';
 import { loadSession, loadEvaluationHistory, createNewSession, saveSession, clearSession } from '@/lib/writingStorage';
+import { StoredEvaluationData } from '@/types/writing';
 import { WritingTaskCard } from './WritingTaskCard';
+import { SessionImprovementsModal } from './SessionImprovementsModal';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -13,7 +15,8 @@ import { Header } from '@/components/layout/Header';
 export function WritingLanding() {
   const router = useRouter();
   const [hasSession, setHasSession] = useState(false);
-  const [history, setHistory] = useState<{ cefrLevel: string; score: number; date: number }[]>([]);
+  const [history, setHistory] = useState<StoredEvaluationData[]>([]);
+  const [activeImprovementIndex, setActiveImprovementIndex] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -21,13 +24,7 @@ export function WritingLanding() {
     setHasSession(!!session);
 
     const evalHistory = loadEvaluationHistory();
-    setHistory(
-      evalHistory.map((entry) => ({
-        cefrLevel: entry.result.overallCefrLevel,
-        score: entry.result.overallScore,
-        date: entry.result.evaluatedAt,
-      }))
-    );
+    setHistory(evalHistory);
     setIsLoaded(true);
   }, []);
 
@@ -100,27 +97,45 @@ export function WritingLanding() {
               Previous results
             </h3>
             <div className="space-y-2">
-              {history.slice(0, 5).map((result, i) => (
+              {history.slice(0, 5).map((entry, i) => (
                 <Card key={i}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Badge variant="info">{result.cefrLevel}</Badge>
+                      <Badge variant="info">{entry.result.overallCefrLevel}</Badge>
                       <span className="text-sm text-gray-600">
-                        {new Date(result.date).toLocaleDateString('fr-FR', {
+                        {new Date(entry.result.evaluatedAt).toLocaleDateString('fr-FR', {
                           day: 'numeric',
                           month: 'long',
                           year: 'numeric',
                         })}
                       </span>
                     </div>
-                    <span className="text-lg font-bold text-gray-900">
-                      {result.score.toFixed(1)}/20
-                    </span>
+                    <div className="flex items-center gap-3">
+                      {entry.originalTexts.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveImprovementIndex(i)}
+                          className="text-sm font-medium text-blue-600 hover:text-blue-800"
+                        >
+                          See improvements
+                        </button>
+                      )}
+                      <span className="text-lg font-bold text-gray-900">
+                        {entry.result.overallScore.toFixed(1)}/20
+                      </span>
+                    </div>
                   </div>
                 </Card>
               ))}
             </div>
           </div>
+        )}
+
+        {activeImprovementIndex !== null && history[activeImprovementIndex] && (
+          <SessionImprovementsModal
+            entry={history[activeImprovementIndex]}
+            onClose={() => setActiveImprovementIndex(null)}
+          />
         )}
       </main>
     </div>

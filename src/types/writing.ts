@@ -114,3 +114,28 @@ export interface ImproveWritingError {
   success: false;
   error: string;
 }
+
+// --- Writing Improvements (persisted) ---
+
+export interface WritingImprovementRecord {
+  sessionId: string;
+  taskId: WritingTaskId;
+  originalText: string;
+  improvedText: string;
+  createdAt: string;
+}
+
+export interface FetchImprovementsResponse {
+  success: true;
+  improvements: WritingImprovementRecord[];
+}
+
+export interface GenerateImprovementResponse {
+  success: true;
+  improvement: WritingImprovementRecord;
+}
+
+export interface ImprovementErrorResponse {
+  success: false;
+  error: string;
+}
