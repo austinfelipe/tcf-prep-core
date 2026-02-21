@@ -45,8 +45,8 @@ export function ReviewSession() {
         <p className="text-gray-600">
           Keep practicing! Verbs become available for review 2 days after you last practiced them.
         </p>
-        <Link href="/">
-          <Button variant="secondary">Back to Home</Button>
+        <Link href="/conjugation">
+          <Button variant="secondary">Back to Conjugation</Button>
         </Link>
       </div>
     );
@@ -103,8 +103,8 @@ export function ReviewSession() {
           <Button onClick={restartSession}>
             Review Again
           </Button>
-          <Link href="/">
-            <Button variant="secondary">Home</Button>
+          <Link href="/conjugation">
+            <Button variant="secondary">Conjugation</Button>
           </Link>
         </div>
       </div>

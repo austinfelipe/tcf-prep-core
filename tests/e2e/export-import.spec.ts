@@ -35,7 +35,7 @@ test.describe('Export / Import progress', () => {
   });
 
   test('Export and Import buttons are visible', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/conjugation');
     await expect(page.getByRole('button', { name: 'Export' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Import' })).toBeVisible();
   });
@@ -43,7 +43,7 @@ test.describe('Export / Import progress', () => {
   test('Export downloads a JSON file with progress data', async ({ page }) => {
     const progress = buildProgressWithEtre();
     await seedProgress(page, progress);
-    await page.goto('/');
+    await page.goto('/conjugation');
 
     const downloadPromise = page.waitForEvent('download');
     await page.getByRole('button', { name: 'Export' }).click();
@@ -63,7 +63,7 @@ test.describe('Export / Import progress', () => {
   test('Import restores progress from exported file', async ({ page }) => {
     const progress = buildProgressWithEtre();
     await seedProgress(page, progress);
-    await page.goto('/');
+    await page.goto('/conjugation');
 
     // A1 percentage is in the first level card
     const a1Percent = page.getByRole('link', { name: /A1/ }).locator('.text-2xl');
@@ -97,7 +97,7 @@ test.describe('Export / Import progress', () => {
   });
 
   test('Import rejects invalid JSON file', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/conjugation');
 
     // Create a temp file with invalid JSON
     const tmpDir = path.join(__dirname, '..', '..', 'tmp');

@@ -6,7 +6,7 @@ import { ReviewSession } from '@/components/review/ReviewSession';
 export default function ReviewPage() {
   return (
     <div className="min-h-screen">
-      <Header title="Review" backHref="/" backLabel="Home" />
+      <Header title="Review" backHref="/conjugation" backLabel="Conjugation" />
       <ReviewSession />
     </div>
   );

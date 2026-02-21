@@ -4,7 +4,7 @@ import { clearProgress } from './helpers/seed';
 test.describe('Home page', () => {
   test.beforeEach(async ({ page }) => {
     await clearProgress(page);
-    await page.goto('/');
+    await page.goto('/conjugation');
   });
 
   test('page loads with header "TCF Prep"', async ({ page }) => {
