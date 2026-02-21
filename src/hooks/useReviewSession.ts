@@ -60,7 +60,7 @@ export function useReviewSession() {
       if (phase !== 'in_progress' || !currentItem || lastResult) return;
 
       const result = validateAnswer(answer, currentItem.acceptedAnswers);
-      recordAnswer(currentItem.levelId, currentItem.verbId, currentItem.comboKey, result.correct);
+      recordAnswer(currentItem.levelId, currentItem.verbId, currentItem.comboKey, result.correct, true);
 
       setAnswers((prev) => [...prev, { item: currentItem, userAnswer: answer, result }]);
       setLastResult({ result, userAnswer: answer });

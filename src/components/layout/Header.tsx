@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useAuth } from '@/hooks/useAuth';
-import { Badge } from '@/components/ui/Badge';
+import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
+import { Badge } from "@/components/ui/Badge";
 
 interface HeaderProps {
   title?: string;
@@ -34,7 +34,7 @@ export function Header({ title, backHref, backLabel }: HeaderProps) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            {backLabel ?? 'Back'}
+            {backLabel ?? "Back"}
           </Link>
         )}
         {title && (
@@ -42,8 +42,6 @@ export function Header({ title, backHref, backLabel }: HeaderProps) {
             {title}
           </h1>
         )}
-        {/* Spacer when back button is present to help center title */}
-        {backHref && !user && <div className="w-12" />}
 
         {/* User menu */}
         {!isLoading && (

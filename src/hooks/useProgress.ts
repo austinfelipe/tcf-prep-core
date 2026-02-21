@@ -29,8 +29,8 @@ export function useProgress() {
   }, []);
 
   const recordAnswer = useCallback(
-    (levelId: LevelId, verbId: string, comboKey: string, correct: boolean) => {
-      update((prev) => updateVerbCombo(prev, levelId, verbId, comboKey, correct));
+    (levelId: LevelId, verbId: string, comboKey: string, correct: boolean, reviewOnly?: boolean) => {
+      update((prev) => updateVerbCombo(prev, levelId, verbId, comboKey, correct, reviewOnly));
     },
     [update]
   );
