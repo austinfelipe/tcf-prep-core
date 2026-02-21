@@ -11,15 +11,15 @@ export function GrammarAnalysisSection({ notes }: GrammarAnalysisSectionProps) {
 
   return (
     <div className="space-y-2">
-      <h4 className="text-sm font-bold text-gray-900">Analyse grammaticale</h4>
+      <h4 className="text-sm font-bold text-gray-900">Grammar analysis</h4>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-200 text-left text-xs text-gray-500">
-              <th className="pb-2 pr-3 font-medium">Extrait</th>
-              <th className="pb-2 pr-3 font-medium">Problème</th>
+              <th className="pb-2 pr-3 font-medium">Excerpt</th>
+              <th className="pb-2 pr-3 font-medium">Issue</th>
               <th className="pb-2 pr-3 font-medium">Correction</th>
-              <th className="pb-2 font-medium">Règle</th>
+              <th className="pb-2 font-medium">Rule</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">

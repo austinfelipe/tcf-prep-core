@@ -32,7 +32,7 @@ export function TaskTimer({ remainingMs, timeExpired, timerStarted }: TaskTimerP
       <span>{timeExpired ? '00:00' : formatTime(remainingMs)}</span>
       {!timerStarted && (
         <span className="text-xs font-normal text-gray-400 ml-1">
-          Commence à la première frappe
+          Starts on first keystroke
         </span>
       )}
     </div>

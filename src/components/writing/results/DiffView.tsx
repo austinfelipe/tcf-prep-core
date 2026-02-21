@@ -14,7 +14,7 @@ export function DiffView({ original, improved }: DiffViewProps) {
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {/* Original */}
       <div>
-        <h4 className="mb-2 text-sm font-bold text-gray-700">Votre texte</h4>
+        <h4 className="mb-2 text-sm font-bold text-gray-700">Your text</h4>
         <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm leading-relaxed text-gray-800">
           {changes.map((part, i) => {
             if (part.added) return null;
@@ -36,7 +36,7 @@ export function DiffView({ original, improved }: DiffViewProps) {
       {/* Improved */}
       <div>
         <h4 className="mb-2 text-sm font-bold text-gray-700">
-          Version améliorée
+          Improved version
         </h4>
         <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm leading-relaxed text-gray-800">
           {changes.map((part, i) => {

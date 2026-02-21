@@ -10,24 +10,24 @@ import { Button } from '@/components/ui/Button';
 
 const FEATURES = [
   {
-    title: 'Expression Ecrite complète',
+    title: 'Complete Written Expression',
     description:
-      '3 tâches chronométrées simulant l\u2019épreuve du TCF',
+      '3 timed tasks simulating the TCF exam',
   },
   {
-    title: 'Évaluation par IA',
+    title: 'AI Evaluation',
     description:
-      'Correction détaillée avec scores sur 5 critères et niveau CEFR',
+      'Detailed correction with scores on 5 criteria and CEFR level',
   },
   {
-    title: 'Version améliorée',
+    title: 'Improved Version',
     description:
-      'L\u2019IA vous propose une version améliorée de votre texte avec diff',
+      'AI suggests an improved version of your text with diff',
   },
   {
-    title: 'Historique illimité',
+    title: 'Unlimited History',
     description:
-      'Retrouvez toutes vos évaluations passées pour suivre vos progrès',
+      'Access all your past evaluations to track your progress',
   },
 ];
 
@@ -81,23 +81,22 @@ export default function ProPage() {
 
   return (
     <div className="min-h-screen">
-      <Header title="PRO" backHref="/" backLabel="Accueil" />
+      <Header title="PRO" backHref="/" backLabel="Home" />
 
       <main className="mx-auto max-w-lg px-4 py-8">
         {isPro ? (
           <>
             <div className="mb-8 text-center">
-              <Badge variant="success">PRO actif</Badge>
+              <Badge variant="success">PRO Active</Badge>
               <h2 className="mt-4 text-2xl font-bold text-gray-900">
-                Vous êtes PRO !
+                You&apos;re PRO!
               </h2>
               <p className="mt-2 text-sm text-gray-500">
-                Vous avez accès à toutes les fonctionnalités d&apos;expression
-                écrite.
+                You have access to all written expression features.
               </p>
               {profile?.pro_until && (
                 <p className="mt-1 text-xs text-gray-400">
-                  Prochain renouvellement :{' '}
+                  Next renewal:{' '}
                   {new Date(profile.pro_until).toLocaleDateString('fr-FR')}
                 </p>
               )}
@@ -105,7 +104,7 @@ export default function ProPage() {
 
             <div className="flex flex-col items-center gap-3">
               <Button onClick={() => router.push('/writing')}>
-                Accéder à l&apos;Expression Ecrite
+                Access Written Expression
               </Button>
               <Button
                 variant="ghost"
@@ -113,8 +112,8 @@ export default function ProPage() {
                 disabled={isRedirecting}
               >
                 {isRedirecting
-                  ? 'Redirection...'
-                  : 'Gérer mon abonnement'}
+                  ? 'Redirecting...'
+                  : 'Manage my subscription'}
               </Button>
             </div>
           </>
@@ -122,11 +121,10 @@ export default function ProPage() {
           <>
             <div className="mb-8 text-center">
               <h2 className="text-2xl font-bold text-gray-900">
-                Passez en PRO
+                Go PRO
               </h2>
               <p className="mt-2 text-sm text-gray-500">
-                Débloquez l&apos;épreuve d&apos;expression écrite avec
-                évaluation par IA
+                Unlock the written expression exam with AI evaluation
               </p>
             </div>
 
@@ -169,11 +167,11 @@ export default function ProPage() {
                 className="w-full"
               >
                 {isRedirecting
-                  ? 'Redirection vers le paiement...'
-                  : 'S\u2019abonner \u2014 4,99 \u20ac/mois'}
+                  ? 'Redirecting to payment...'
+                  : 'Subscribe \u2014 \u20ac4.99/month'}
               </Button>
               <p className="mt-3 text-xs text-gray-400">
-                Annulable à tout moment depuis votre espace abonné
+                Cancel anytime from your subscriber area
               </p>
             </div>
           </>

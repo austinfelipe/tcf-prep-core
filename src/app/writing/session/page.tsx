@@ -6,7 +6,7 @@ import { WritingSession } from '@/components/writing/WritingSession';
 export default function WritingSessionPage() {
   return (
     <div className="min-h-screen">
-      <Header title="Expression Ecrite" backHref="/writing" backLabel="Retour" />
+      <Header title="Written Expression" backHref="/writing" backLabel="Back" />
       <main className="mx-auto max-w-2xl px-4 py-6">
         <WritingSession />
       </main>

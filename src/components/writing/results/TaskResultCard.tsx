@@ -32,7 +32,7 @@ export function TaskResultCard({ evaluation, originalText, originalPrompt }: Tas
             </div>
             <div>
               <h3 className="font-bold text-gray-900">
-                {taskDef?.title ?? `Tâche ${evaluation.taskId}`}
+                {taskDef?.title ?? `Task ${evaluation.taskId}`}
               </h3>
             </div>
           </div>
@@ -51,7 +51,7 @@ export function TaskResultCard({ evaluation, originalText, originalPrompt }: Tas
         <div className="grid grid-cols-2 gap-4">
           {evaluation.strengths.length > 0 && (
             <div>
-              <h4 className="text-sm font-bold text-green-700 mb-1">Points forts</h4>
+              <h4 className="text-sm font-bold text-green-700 mb-1">Strengths</h4>
               <ul className="space-y-1">
                 {evaluation.strengths.map((s, i) => (
                   <li key={i} className="text-sm text-gray-600 flex gap-1.5">
@@ -64,7 +64,7 @@ export function TaskResultCard({ evaluation, originalText, originalPrompt }: Tas
           )}
           {evaluation.weaknesses.length > 0 && (
             <div>
-              <h4 className="text-sm font-bold text-red-700 mb-1">Points faibles</h4>
+              <h4 className="text-sm font-bold text-red-700 mb-1">Weaknesses</h4>
               <ul className="space-y-1">
                 {evaluation.weaknesses.map((w, i) => (
                   <li key={i} className="text-sm text-gray-600 flex gap-1.5">
@@ -83,7 +83,7 @@ export function TaskResultCard({ evaluation, originalText, originalPrompt }: Tas
             variant="secondary"
             onClick={() => setShowImprovedModal(true)}
           >
-            Voir la version améliorée
+            View improved version
           </Button>
         )}
 
@@ -93,7 +93,7 @@ export function TaskResultCard({ evaluation, originalText, originalPrompt }: Tas
           onClick={() => setExpanded(!expanded)}
           className="text-sm font-medium text-blue-600 hover:text-blue-700"
         >
-          {expanded ? 'Masquer les détails' : 'Voir les détails'}
+          {expanded ? 'Hide details' : 'View details'}
         </button>
 
         {expanded && (
@@ -103,7 +103,7 @@ export function TaskResultCard({ evaluation, originalText, originalPrompt }: Tas
             {evaluation.coherenceAnalysis && (
               <div>
                 <h4 className="text-sm font-bold text-gray-900 mb-1">
-                  Analyse de la cohérence
+                  Coherence analysis
                 </h4>
                 <p className="text-sm text-gray-600 leading-relaxed">
                   {evaluation.coherenceAnalysis}
@@ -114,7 +114,7 @@ export function TaskResultCard({ evaluation, originalText, originalPrompt }: Tas
             {evaluation.lexicalAnalysis && (
               <div>
                 <h4 className="text-sm font-bold text-gray-900 mb-1">
-                  Analyse lexicale
+                  Lexical analysis
                 </h4>
                 <p className="text-sm text-gray-600 leading-relaxed">
                   {evaluation.lexicalAnalysis}

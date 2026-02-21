@@ -45,13 +45,13 @@ export function ImprovedVersionModal({
           await response.json();
 
         if (!response.ok || !data.success) {
-          setError((data as ImproveWritingError).error ?? "Erreur lors de l'amélioration");
+          setError((data as ImproveWritingError).error ?? "Improvement error");
           return;
         }
 
         setImprovedText((data as ImproveWritingResponse).improvedText);
       } catch {
-        setError("Erreur réseau. Veuillez réessayer.");
+        setError("Network error. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -84,13 +84,13 @@ export function ImprovedVersionModal({
           await response.json();
 
         if (!response.ok || !data.success) {
-          setError((data as ImproveWritingError).error ?? "Erreur lors de l'amélioration");
+          setError((data as ImproveWritingError).error ?? "Improvement error");
           return;
         }
 
         setImprovedText((data as ImproveWritingResponse).improvedText);
       } catch {
-        setError("Erreur réseau. Veuillez réessayer.");
+        setError("Network error. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -102,7 +102,7 @@ export function ImprovedVersionModal({
       <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-xl bg-white p-6 shadow-xl">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-lg font-bold text-gray-900">
-            Version améliorée — Tâche {taskId}
+            Improved version — Task {taskId}
           </h3>
           <button
             type="button"
@@ -119,7 +119,7 @@ export function ImprovedVersionModal({
           <div className="flex flex-col items-center justify-center gap-3 py-12">
             <div className="h-8 w-8 animate-spin rounded-full border-3 border-blue-500 border-t-transparent" />
             <p className="text-sm text-gray-500">
-              Génération de la version améliorée...
+              Generating improved version...
             </p>
           </div>
         )}
@@ -130,7 +130,7 @@ export function ImprovedVersionModal({
               <p className="text-sm text-red-600">{error}</p>
             </div>
             <Button variant="secondary" onClick={handleRetry}>
-              Réessayer
+              Retry
             </Button>
           </div>
         )}
@@ -141,7 +141,7 @@ export function ImprovedVersionModal({
 
         <div className="mt-6 flex justify-end">
           <Button variant="secondary" onClick={onClose}>
-            Fermer
+            Close
           </Button>
         </div>
       </div>

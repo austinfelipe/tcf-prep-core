@@ -18,9 +18,9 @@ export function SubmitConfirmDialog({ tasks, onConfirm, onCancel }: SubmitConfir
     const task = tasks[def.id];
     const wc = countWords(task.text);
     if (wc === 0) {
-      warnings.push(`Tâche ${def.id} : aucun texte`);
+      warnings.push(`Task ${def.id}: no text`);
     } else if (wc < def.minWords) {
-      warnings.push(`Tâche ${def.id} : ${wc} mots (minimum ${def.minWords})`);
+      warnings.push(`Task ${def.id}: ${wc} words (minimum ${def.minWords})`);
     }
   }
 
@@ -28,16 +28,16 @@ export function SubmitConfirmDialog({ tasks, onConfirm, onCancel }: SubmitConfir
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
         <h3 className="text-lg font-bold text-gray-900">
-          Soumettre pour évaluation ?
+          Submit for evaluation?
         </h3>
         <p className="mt-2 text-sm text-gray-600">
-          Vos textes seront envoyés pour une évaluation par IA selon les critères du TCF.
-          Cette action est définitive pour cette session.
+          Your texts will be sent for AI evaluation based on TCF criteria.
+          This action is final for this session.
         </p>
 
         {warnings.length > 0 && (
           <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3">
-            <p className="text-sm font-medium text-amber-800">Attention :</p>
+            <p className="text-sm font-medium text-amber-800">Warning:</p>
             <ul className="mt-1 space-y-1">
               {warnings.map((w, i) => (
                 <li key={i} className="text-sm text-amber-700">
@@ -53,8 +53,8 @@ export function SubmitConfirmDialog({ tasks, onConfirm, onCancel }: SubmitConfir
             const wc = countWords(tasks[def.id].text);
             return (
               <div key={def.id} className="flex justify-between text-sm text-gray-600">
-                <span>Tâche {def.id} – {def.title}</span>
-                <span className="font-medium">{wc} mots</span>
+                <span>Task {def.id} – {def.title}</span>
+                <span className="font-medium">{wc} words</span>
               </div>
             );
           })}
@@ -62,10 +62,10 @@ export function SubmitConfirmDialog({ tasks, onConfirm, onCancel }: SubmitConfir
 
         <div className="mt-6 flex gap-3">
           <Button variant="secondary" onClick={onCancel} className="flex-1">
-            Annuler
+            Cancel
           </Button>
           <Button onClick={onConfirm} className="flex-1">
-            Soumettre
+            Submit
           </Button>
         </div>
       </div>

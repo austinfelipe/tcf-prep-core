@@ -158,15 +158,15 @@ export default function HomePage() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <h3 className="text-xl font-bold text-gray-900">
-                      Expression Ecrite
+                      Written Expression
                     </h3>
                     {!isPro && <Badge variant="warning">PRO</Badge>}
                   </div>
                   <p className="mt-1 text-sm text-gray-500">
-                    Simulez l&apos;épreuve d&apos;expression écrite du TCF : 3 tâches chronométrées avec évaluation par IA
+                    Simulate the TCF written expression exam: 3 timed tasks with AI evaluation
                   </p>
                   <p className="mt-2 text-xs text-gray-400">
-                    3 tâches · A1–C2 · Évaluation IA
+                    3 tasks · A1–C2 · AI Evaluation
                   </p>
                 </div>
                 <div className="ml-2 mt-1">

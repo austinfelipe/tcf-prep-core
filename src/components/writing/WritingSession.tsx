@@ -128,7 +128,7 @@ export function WritingSession() {
         />
         <div className="text-right">
           <span className="text-sm font-medium text-gray-500">
-            Tâche {activeTask.taskId} / 3
+            Task {activeTask.taskId} / 3
           </span>
         </div>
       </div>
@@ -145,8 +145,8 @@ export function WritingSession() {
         disabled={activeTask.timeExpired}
         placeholder={
           activeTask.timeExpired
-            ? 'Temps écoulé — édition désactivée'
-            : 'Commencez à écrire ici...'
+            ? 'Time expired — editing disabled'
+            : 'Start writing here...'
         }
       />
 
@@ -164,7 +164,7 @@ export function WritingSession() {
           disabled={isSubmitting}
           size="lg"
         >
-          {isSubmitting ? 'Soumission en cours...' : 'Soumettre pour évaluation'}
+          {isSubmitting ? 'Submitting...' : 'Submit for evaluation'}
         </Button>
       </div>
 
@@ -186,7 +186,7 @@ export function WritingSession() {
 
       {isRecovered && recoveryToast && (
         <Toast
-          message="Session récupérée"
+          message="Session recovered"
           variant="success"
           duration={3000}
           onDismiss={() => setRecoveryToast(false)}

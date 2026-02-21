@@ -53,7 +53,7 @@ export function Header({ title, backHref, backLabel }: HeaderProps) {
                   onClick={() => signOut()}
                   className="text-xs text-gray-500 hover:text-gray-700"
                 >
-                  Déconnexion
+                  Sign out
                 </button>
               </>
             ) : (
@@ -61,7 +61,7 @@ export function Header({ title, backHref, backLabel }: HeaderProps) {
                 href="/login"
                 className="text-xs font-medium text-blue-600 hover:text-blue-800"
               >
-                Se connecter
+                Sign in
               </Link>
             )}
           </div>

@@ -21,7 +21,7 @@ export function WritingTaskCard({ task }: WritingTaskCardProps) {
             <Badge variant="info">{task.cefrRange}</Badge>
           </div>
           <p className="mt-1 text-sm text-gray-500">
-            {task.minWords}–{task.maxWords} mots · {task.timeLimitSeconds / 60} minutes · Registre {task.register === 'informal' ? 'informel' : task.register === 'semi-formal' ? 'semi-formel' : 'formel'}
+            {task.minWords}–{task.maxWords} words · {task.timeLimitSeconds / 60} minutes · Register: {task.register === 'informal' ? 'informal' : task.register === 'semi-formal' ? 'semi-formal' : 'formal'}
           </p>
         </div>
       </div>

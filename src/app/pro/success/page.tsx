@@ -40,7 +40,7 @@ export default function ProSuccessPage() {
 
   return (
     <div className="min-h-screen">
-      <Header title="Bienvenue PRO" backHref="/" backLabel="Accueil" />
+      <Header title="Welcome PRO" backHref="/" backLabel="Home" />
 
       <main className="mx-auto max-w-lg px-4 py-12">
         <div className="text-center">
@@ -62,19 +62,18 @@ export default function ProSuccessPage() {
                 </svg>
               </div>
 
-              <Badge variant="success">PRO actif</Badge>
+              <Badge variant="success">PRO Active</Badge>
 
               <h2 className="mt-4 text-2xl font-bold text-gray-900">
-                Paiement confirmé !
+                Payment confirmed!
               </h2>
               <p className="mt-2 text-gray-500">
-                Vous avez maintenant accès à l&apos;expression écrite avec
-                évaluation par IA.
+                You now have access to written expression with AI evaluation.
               </p>
 
               <div className="mt-8">
                 <Button onClick={() => router.push('/writing')}>
-                  Commencer l&apos;expression écrite
+                  Start Written Expression
                 </Button>
               </div>
             </>
@@ -83,10 +82,10 @@ export default function ProSuccessPage() {
               <div className="flex flex-col items-center gap-3 py-4">
                 <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
                 <p className="text-sm text-gray-500">
-                  Activation de votre abonnement en cours...
+                  Activating your subscription...
                 </p>
                 <p className="text-xs text-gray-400">
-                  Cela peut prendre quelques secondes.
+                  This may take a few seconds.
                 </p>
               </div>
             </Card>

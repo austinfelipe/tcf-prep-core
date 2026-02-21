@@ -17,16 +17,16 @@ export function WordCounter({ text, minWords, maxWords }: WordCounterProps) {
 
   const statusLabel =
     status === 'under'
-      ? `${minWords - count} mots restants`
+      ? `${minWords - count} words remaining`
       : status === 'over'
-        ? `${count - maxWords} mots en trop`
-        : 'Dans la limite';
+        ? `${count - maxWords} words over`
+        : 'Within limit';
 
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between text-sm">
         <span className="font-medium text-gray-700">
-          {count} / {minWords}–{maxWords} mots
+          {count} / {minWords}–{maxWords} words
         </span>
         <span
           className={`text-xs font-medium ${

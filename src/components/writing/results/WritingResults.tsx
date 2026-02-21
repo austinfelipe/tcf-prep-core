@@ -76,7 +76,7 @@ export function WritingResults() {
         if (!response.ok || !data.success) {
           setError(
             (data as EvaluateWritingError).error ??
-              "Erreur lors de l'évaluation"
+              "Evaluation error"
           );
           setLoading(false);
           return;
@@ -88,7 +88,7 @@ export function WritingResults() {
         setResult(evalResult);
         setOriginalTexts(savedOriginalTexts);
       } catch {
-        setError("Erreur réseau. Veuillez vérifier votre connexion et réessayer.");
+        setError("Network error. Please check your connection and try again.");
       }
       setLoading(false);
     }
@@ -102,11 +102,11 @@ export function WritingResults() {
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4">
         <div className="rounded-lg border border-red-200 bg-red-50 p-6 text-center max-w-md">
-          <h3 className="text-lg font-bold text-red-800">Erreur</h3>
+          <h3 className="text-lg font-bold text-red-800">Error</h3>
           <p className="mt-2 text-sm text-red-600">{error}</p>
         </div>
         <Button variant="secondary" onClick={() => router.push('/writing')}>
-          Retour
+          Back
         </Button>
       </div>
     );
@@ -141,7 +141,7 @@ export function WritingResults() {
           onClick={() => router.push('/writing')}
           className="flex-1"
         >
-          Retour
+          Back
         </Button>
         <Button
           onClick={() => {
@@ -150,7 +150,7 @@ export function WritingResults() {
           }}
           className="flex-1"
         >
-          Nouvelle session
+          New session
         </Button>
       </div>
     </div>

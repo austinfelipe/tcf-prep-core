@@ -10,8 +10,8 @@ interface TimeWarningToastProps {
 export function TimeWarningToast({ type, onDismiss }: TimeWarningToastProps) {
   const message =
     type === '5min'
-      ? 'Plus que 5 minutes pour cette tâche !'
-      : 'Attention : 2 minutes restantes !';
+      ? 'Only 5 minutes left for this task!'
+      : 'Warning: 2 minutes remaining!';
 
   return (
     <Toast

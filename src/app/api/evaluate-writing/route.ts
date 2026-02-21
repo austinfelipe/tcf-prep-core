@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
 
   if (authError || !user) {
     return NextResponse.json(
-      { success: false, error: 'Authentification requise' },
+      { success: false, error: 'Authentication required' },
       { status: 401 }
     );
   }
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
   if (!profile?.is_pro) {
     return NextResponse.json(
-      { success: false, error: 'Abonnement PRO requis' },
+      { success: false, error: 'PRO subscription required' },
       { status: 403 }
     );
   }
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
   const { allowed, remaining } = checkRateLimit(user.id);
   if (!allowed) {
     return NextResponse.json(
-      { success: false, error: 'Limite de requêtes atteinte. Réessayez dans une heure.' },
+      { success: false, error: 'Rate limit reached. Try again in an hour.' },
       {
         status: 429,
         headers: { 'X-RateLimit-Remaining': String(remaining) },
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: "Erreur lors de l'évaluation. Veuillez réessayer.",
+        error: "Evaluation error. Please try again.",
       },
       { status: 500 }
     );

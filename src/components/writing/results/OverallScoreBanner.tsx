@@ -16,11 +16,11 @@ export function OverallScoreBanner({ cefrLevel, score }: OverallScoreBannerProps
 
   return (
     <div className={`rounded-xl border-2 p-6 text-center ${colorClasses}`}>
-      <p className="text-sm font-medium opacity-75">Niveau global estimé</p>
+      <p className="text-sm font-medium opacity-75">Estimated overall level</p>
       <p className="mt-2 text-5xl font-bold">{cefrLevel}</p>
       <p className="mt-2 text-2xl font-bold">{score.toFixed(1)} / 20</p>
       <p className="mt-1 text-sm opacity-75">
-        Moyenne des 3 tâches
+        Average of 3 tasks
       </p>
     </div>
   );

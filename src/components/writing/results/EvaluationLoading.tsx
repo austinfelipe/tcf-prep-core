@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 
 const STEPS = [
-  'Envoi de vos réponses...',
-  'Analyse de la tâche 1...',
-  'Analyse de la tâche 2...',
-  'Analyse de la tâche 3...',
-  'Calcul du score final...',
+  'Sending your responses...',
+  'Analyzing task 1...',
+  'Analyzing task 2...',
+  'Analyzing task 3...',
+  'Calculating final score...',
 ];
 
 const STEP_DURATION_MS = 3000;
@@ -35,7 +35,7 @@ export function EvaluationLoading() {
       <div className="w-full max-w-md space-y-4">
         <div className="text-center">
           <h3 className="text-lg font-bold text-gray-900">
-            Évaluation en cours...
+            Evaluation in progress...
           </h3>
           <p className="mt-1 text-sm font-medium text-blue-600">
             {STEPS[currentStep]}

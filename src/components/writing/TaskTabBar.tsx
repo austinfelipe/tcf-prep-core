@@ -10,9 +10,9 @@ interface TaskTabBarProps {
 }
 
 function getStatusIndicator(task: WritingTaskState): { color: string; label: string } {
-  if (task.timeExpired) return { color: 'bg-red-400', label: 'Terminé' };
-  if (task.text.length > 0) return { color: 'bg-blue-400', label: 'En cours' };
-  return { color: 'bg-gray-300', label: 'Pas commencé' };
+  if (task.timeExpired) return { color: 'bg-red-400', label: 'Complete' };
+  if (task.text.length > 0) return { color: 'bg-blue-400', label: 'In progress' };
+  return { color: 'bg-gray-300', label: 'Not started' };
 }
 
 export function TaskTabBar({ activeTaskId, tasks, onTabChange }: TaskTabBarProps) {
@@ -35,7 +35,7 @@ export function TaskTabBar({ activeTaskId, tasks, onTabChange }: TaskTabBarProps
             }`}
           >
             <span className={`h-2 w-2 rounded-full ${status.color}`} title={status.label} />
-            Tâche {def.id}
+            Task {def.id}
             {isActive && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
             )}

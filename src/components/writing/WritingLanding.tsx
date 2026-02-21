@@ -45,7 +45,7 @@ export function WritingLanding() {
   if (!isLoaded) {
     return (
       <div className="min-h-screen">
-        <Header title="Expression Ecrite" backHref="/" backLabel="Accueil" />
+        <Header title="Written Expression" backHref="/" backLabel="Home" />
         <div className="flex min-h-[60vh] items-center justify-center">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
         </div>
@@ -55,17 +55,17 @@ export function WritingLanding() {
 
   return (
     <div className="min-h-screen">
-      <Header title="Expression Ecrite" backHref="/" backLabel="Accueil" />
+      <Header title="Written Expression" backHref="/" backLabel="Home" />
 
       <main className="mx-auto max-w-2xl px-4 py-8">
         {/* Introduction */}
         <div className="mb-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900">
-            Expression Ecrite — TCF
+            Written Expression — TCF
           </h2>
           <p className="mt-2 text-gray-500">
-            Simulez l&apos;épreuve d&apos;expression écrite du TCF : 3 tâches avec des registres
-            et limites de mots différents, suivies d&apos;une évaluation par IA.
+            Simulate the TCF written expression exam: 3 tasks with different registers
+            and word limits, followed by AI evaluation.
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export function WritingLanding() {
         {/* Start / Resume buttons */}
         <div className="flex flex-col gap-3 mb-8">
           <Button onClick={handleStartNew} size="lg" className="w-full">
-            Nouvelle session
+            New session
           </Button>
           {hasSession && (
             <Button
@@ -88,7 +88,7 @@ export function WritingLanding() {
               size="lg"
               className="w-full"
             >
-              Reprendre la session en cours
+              Resume current session
             </Button>
           )}
         </div>
@@ -97,7 +97,7 @@ export function WritingLanding() {
         {history.length > 0 && (
           <div>
             <h3 className="mb-3 text-lg font-bold text-gray-900">
-              Résultats précédents
+              Previous results
             </h3>
             <div className="space-y-2">
               {history.slice(0, 5).map((result, i) => (
