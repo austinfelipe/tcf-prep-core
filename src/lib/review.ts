@@ -114,7 +114,7 @@ export function getReviewSummary(progress: UserProgress): ReviewSummary {
       let hasDueCombo = false;
 
       for (const [, combo] of Object.entries(verbMastery)) {
-        if (combo.totalAttempts === 0) continue;
+        if (combo.totalAttempts === 0 || !combo.lastPracticed) continue;
         hasPracticed = true;
 
         const staleness = now - combo.lastPracticed;
