@@ -1,16 +1,26 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense, useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClient } from "@/lib/supabase/client";
 import { Header } from "@/components/layout/Header";
+import { useAuth } from "@/hooks/useAuth";
 
 function LoginForm() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const redirect = searchParams.get("redirect") ?? "/";
+  const { user, isLoading } = useAuth();
   const supabase = createClient();
+
+  // Redirect authenticated users away from login page
+  useEffect(() => {
+    if (!isLoading && user) {
+      router.replace(redirect);
+    }
+  }, [user, isLoading, redirect, router]);
 
   return (
     <div className="min-h-screen">
