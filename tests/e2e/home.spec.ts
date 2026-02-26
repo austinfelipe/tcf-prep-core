@@ -1,5 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { clearProgress } from './helpers/seed';
+import {
+  clearProgress,
+  seedProgress,
+  buildStaleVerbProgress,
+  PROGRESS_VERSION,
+  A1_TENSES,
+  ALL_PRONOUNS,
+} from './helpers/seed';
 
 test.describe('Home page', () => {
   test.beforeEach(async ({ page }) => {
@@ -36,5 +43,29 @@ test.describe('Home page', () => {
     await expect(
       page.getByRole('button', { name: 'Reset Progress' }),
     ).toBeVisible();
+  });
+
+  test('shows review section with due count when stale progress exists', async ({ page }) => {
+    // Create a fresh page context with stale progress seeded
+    await seedProgress(page, {
+      version: PROGRESS_VERSION,
+      levels: {
+        a1: {
+          unlocked: true,
+          verbMastery: {
+            etre: buildStaleVerbProgress('etre', A1_TENSES, ALL_PRONOUNS, 5),
+          },
+          testAttempts: [],
+          testPassed: false,
+        },
+        a2: { unlocked: false, verbMastery: {}, testAttempts: [], testPassed: false },
+        b1: { unlocked: false, verbMastery: {}, testAttempts: [], testPassed: false },
+        b2: { unlocked: false, verbMastery: {}, testAttempts: [], testPassed: false },
+      },
+    });
+    await page.goto('/conjugation');
+
+    await expect(page.getByRole('heading', { name: 'Review' })).toBeVisible();
+    await expect(page.getByText(/1 verb.* due/)).toBeVisible();
   });
 });

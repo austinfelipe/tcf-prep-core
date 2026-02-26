@@ -59,6 +59,22 @@ async function clearProgress(page: Page) {
   });
 }
 
+function buildStaleVerbProgress(
+  verbId: string,
+  tenses: readonly string[],
+  pronouns: readonly string[],
+  daysAgo = 3,
+) {
+  const lastPracticed = Date.now() - daysAgo * 24 * 60 * 60 * 1000;
+  const mastery: Record<string, { correctCount: number; totalAttempts: number; lastPracticed: number }> = {};
+  for (const tense of tenses) {
+    for (const pronoun of pronouns) {
+      mastery[`${tense}:${pronoun}`] = { correctCount: 3, totalAttempts: 3, lastPracticed };
+    }
+  }
+  return mastery;
+}
+
 export {
   STORAGE_KEY,
   PROGRESS_VERSION,
@@ -67,6 +83,7 @@ export {
   ALL_PRONOUNS,
   buildMasteredCombo,
   buildFullVerbMastery,
+  buildStaleVerbProgress,
   buildAllA1Dominated,
   seedProgress,
   clearProgress,
