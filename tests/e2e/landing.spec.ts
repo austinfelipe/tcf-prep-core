@@ -16,9 +16,12 @@ test.describe('Landing page', () => {
     await expect(page).toHaveURL(/\/conjugation/);
   });
 
-  test('shows 3 feature cards', async ({ page }) => {
+  test('shows 4 feature cards', async ({ page }) => {
     await expect(
       page.getByRole('heading', { name: 'Verb Conjugation' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Translation' }),
     ).toBeVisible();
     await expect(
       page.getByRole('heading', { name: 'Written Expression' }),

@@ -45,6 +45,10 @@ test.describe('Home page', () => {
     ).toBeVisible();
   });
 
+  test('does not show Written Expression card', async ({ page }) => {
+    await expect(page.getByText('Written Expression')).not.toBeVisible();
+  });
+
   test('shows review section with due count when stale progress exists', async ({ page }) => {
     // Create a fresh page context with stale progress seeded
     await seedProgress(page, {

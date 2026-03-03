@@ -9,9 +9,10 @@ const ACCENT_CHARS = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ù', 'û', 'ô', 'î'
 interface AnswerInputProps {
   onSubmit: (answer: string) => void;
   disabled?: boolean;
+  placeholder?: string;
 }
 
-export function AnswerInput({ onSubmit, disabled }: AnswerInputProps) {
+export function AnswerInput({ onSubmit, disabled, placeholder = 'Type conjugation...' }: AnswerInputProps) {
   const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -54,7 +55,7 @@ export function AnswerInput({ onSubmit, disabled }: AnswerInputProps) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type conjugation..."
+          placeholder={placeholder}
           disabled={disabled}
           autoComplete="off"
           autoCapitalize="off"
