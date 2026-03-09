@@ -22,6 +22,12 @@ export function LandingHeader() {
             Conjugation
           </Link>
           <Link
+            href="/adverb"
+            className="text-sm text-gray-600 hover:text-gray-900"
+          >
+            Adjectives
+          </Link>
+          <Link
             href="/writing"
             className="text-sm text-gray-600 hover:text-gray-900"
           >

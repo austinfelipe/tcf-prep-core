@@ -103,6 +103,33 @@ export default function LandingPage() {
               </div>
             </Card>
 
+            {/* Adjectives */}
+            <Card className="flex flex-col">
+              <div className="mb-4 flex items-center gap-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100">
+                  <svg className="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z" />
+                  </svg>
+                </div>
+                <Badge variant="success">Free</Badge>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900">Adjectives</h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Master feminine forms and adverbs across CEFR levels.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-gray-600">
+                <li className="flex items-center gap-2">{CHECK_ICON} 140+ adjectives across A1–B2</li>
+                <li className="flex items-center gap-2">{CHECK_ICON} Feminine + adverb forms</li>
+                <li className="flex items-center gap-2">{CHECK_ICON} Accent-aware validation</li>
+                <li className="flex items-center gap-2">{CHECK_ICON} Level-up progression</li>
+              </ul>
+              <div className="mt-auto pt-6">
+                <Link href="/adverb">
+                  <Button variant="secondary" className="w-full">Start Practicing</Button>
+                </Link>
+              </div>
+            </Card>
+
             {/* Written Expression */}
             <Card className="flex flex-col">
               <div className="mb-4 flex items-center gap-2">
@@ -171,6 +198,7 @@ export default function LandingPage() {
               <ul className="mt-6 space-y-3 text-sm text-gray-600">
                 <li className="flex items-center gap-2">{CHECK_ICON} Verb conjugation (A1–B2)</li>
                 <li className="flex items-center gap-2">{CHECK_ICON} Translation practice (A1–B2)</li>
+                <li className="flex items-center gap-2">{CHECK_ICON} Adjective practice (A1–B2)</li>
                 <li className="flex items-center gap-2">{CHECK_ICON} 8 tenses</li>
                 <li className="flex items-center gap-2">{CHECK_ICON} Spaced repetition review</li>
                 <li className="flex items-center gap-2">{CHECK_ICON} Level-up tests</li>
