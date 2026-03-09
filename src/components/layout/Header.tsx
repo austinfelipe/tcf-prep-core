@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useAuth } from "@/hooks/useAuth";
-import { Badge } from "@/components/ui/Badge";
+import { UserMenu } from "@/components/ui/UserMenu";
 
 interface HeaderProps {
   title?: string;
@@ -11,11 +10,9 @@ interface HeaderProps {
 }
 
 export function Header({ title, backHref, backLabel }: HeaderProps) {
-  const { user, isPro, isLoading, signOut } = useAuth();
-
   return (
     <header className="sticky top-0 z-10 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-14 max-w-2xl items-center gap-3 px-4">
+      <div className="mx-auto flex h-16 max-w-2xl items-center gap-3 px-4">
         {backHref && (
           <Link
             href={backHref}
@@ -43,29 +40,9 @@ export function Header({ title, backHref, backLabel }: HeaderProps) {
           </h1>
         )}
 
-        {/* User menu */}
-        {!isLoading && (
-          <div className="flex items-center gap-2">
-            {user ? (
-              <>
-                {isPro && <Badge variant="warning">PRO</Badge>}
-                <button
-                  onClick={() => signOut()}
-                  className="text-xs text-gray-500 hover:text-gray-700"
-                >
-                  Sign out
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/login"
-                className="text-xs font-medium text-blue-600 hover:text-blue-800"
-              >
-                Sign in
-              </Link>
-            )}
-          </div>
-        )}
+        <div className="ml-auto">
+          <UserMenu />
+        </div>
       </div>
     </header>
   );

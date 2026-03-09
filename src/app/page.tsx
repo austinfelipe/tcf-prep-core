@@ -21,10 +21,13 @@ export default function LandingPage() {
       <LandingHeader />
 
       {/* Hero */}
-      <section className="py-20 text-center">
-        <div className="mx-auto max-w-3xl px-4">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-28 sm:py-32 text-center">
+        {/* Decorative blurred circle */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-blue-400/20 blur-3xl" />
+
+        <div className="relative mx-auto max-w-3xl px-4 animate-fade-in">
           <Badge variant="info">TCF Exam Preparation</Badge>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          <h1 className="mt-4 text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Master French for the TCF Exam
           </h1>
           <p className="mt-4 text-lg text-gray-600">
@@ -33,7 +36,9 @@ export default function LandingPage() {
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
             <Link href="/conjugation">
-              <Button size="lg">Get Started Free</Button>
+              <Button size="lg" className="shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-200">
+                Get Started Free
+              </Button>
             </Link>
             <a href="#pricing">
               <Button variant="secondary" size="lg">View Pricing</Button>
@@ -43,17 +48,20 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="border-t border-gray-200 bg-white py-16">
-        <div className="mx-auto max-w-5xl px-4">
+      <section className="bg-white py-16">
+        {/* Gradient divider */}
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+
+        <div className="mx-auto max-w-5xl px-4 pt-16">
           <h2 className="mb-10 text-center text-2xl font-bold text-gray-900">
             Everything you need to prepare
           </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {/* Verb Conjugation */}
-            <Card className="flex flex-col">
+            <Card className="flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-200">
               <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100">
-                  <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 ring-1 ring-green-200">
+                  <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
                   </svg>
                 </div>
@@ -77,10 +85,10 @@ export default function LandingPage() {
             </Card>
 
             {/* Translation */}
-            <Card className="flex flex-col">
+            <Card className="flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-200">
               <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-100">
-                  <svg className="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-100 ring-1 ring-indigo-200">
+                  <svg className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
                   </svg>
                 </div>
@@ -104,10 +112,10 @@ export default function LandingPage() {
             </Card>
 
             {/* Adjectives */}
-            <Card className="flex flex-col">
+            <Card className="flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-200">
               <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100">
-                  <svg className="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100 ring-1 ring-purple-200">
+                  <svg className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z" />
                   </svg>
                 </div>
@@ -131,10 +139,10 @@ export default function LandingPage() {
             </Card>
 
             {/* Written Expression */}
-            <Card className="flex flex-col">
+            <Card className="flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-200">
               <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
-                  <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 ring-1 ring-blue-200">
+                  <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                   </svg>
                 </div>
@@ -156,12 +164,14 @@ export default function LandingPage() {
                 </Link>
               </div>
             </Card>
+          </div>
 
-            {/* Oral Expression */}
-            <Card className="flex flex-col opacity-60">
+          {/* Coming Soon card - centered below grid */}
+          <div className="mt-6 flex justify-center">
+            <Card className="flex max-w-sm flex-col opacity-60">
               <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 ring-1 ring-gray-200">
+                  <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z" />
                   </svg>
                 </div>
@@ -182,14 +192,17 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="border-t border-gray-200 py-16">
-        <div className="mx-auto max-w-5xl px-4">
+      <section id="pricing" className="bg-gradient-to-br from-gray-50 to-blue-50/50 py-16">
+        {/* Gradient divider */}
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+
+        <div className="mx-auto max-w-5xl px-4 pt-16">
           <h2 className="mb-10 text-center text-2xl font-bold text-gray-900">
             Simple pricing
           </h2>
           <div className="mx-auto grid max-w-3xl gap-6 md:grid-cols-2">
             {/* Free */}
-            <Card className="flex flex-col">
+            <Card className="flex flex-col hover:shadow-md transition-shadow">
               <h3 className="text-xl font-bold text-gray-900">Free</h3>
               <p className="mt-1 text-sm text-gray-500">Perfect to get started</p>
               <div className="mt-4">
@@ -213,7 +226,7 @@ export default function LandingPage() {
             </Card>
 
             {/* PRO */}
-            <Card className="flex flex-col border-2 border-blue-500">
+            <Card className="flex flex-col ring-2 ring-blue-500/20 shadow-lg">
               <div className="flex items-center gap-2">
                 <h3 className="text-xl font-bold text-gray-900">PRO</h3>
                 {isPro && <Badge variant="success">Active</Badge>}
@@ -242,10 +255,21 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 py-8">
-        <p className="text-center text-sm text-gray-400">
-          TCF Simulator — Prepare for the TCF exam with confidence.
-        </p>
+      <footer className="py-12">
+        {/* Gradient top border */}
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+
+        <div className="mx-auto max-w-5xl px-4 pt-8">
+          <nav className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
+            <Link href="/conjugation" className="hover:text-gray-700 transition-colors">Conjugation</Link>
+            <Link href="/adverb" className="hover:text-gray-700 transition-colors">Adjectives</Link>
+            <Link href="/writing" className="hover:text-gray-700 transition-colors">Writing</Link>
+            <Link href="/pro" className="hover:text-gray-700 transition-colors">Pricing</Link>
+          </nav>
+          <p className="mt-6 text-center text-sm text-gray-400">
+            TCF Simulator — Prepare for the TCF exam with confidence.
+          </p>
+        </div>
       </footer>
     </div>
   );
