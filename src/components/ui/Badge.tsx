@@ -9,11 +9,11 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: 'bg-gray-100 text-gray-700',
-  success: 'bg-green-100 text-green-800',
-  warning: 'bg-amber-100 text-amber-800',
-  info: 'bg-blue-100 text-blue-800',
-  locked: 'bg-gray-200 text-gray-500',
+  default: 'bg-muted text-muted-foreground',
+  success: 'bg-success/10 text-success',
+  warning: 'bg-accent/20 text-accent-foreground',
+  info: 'bg-primary/10 text-primary',
+  locked: 'bg-muted text-muted-foreground',
 };
 
 export function Badge({ children, variant = 'default', className = '' }: BadgeProps) {
