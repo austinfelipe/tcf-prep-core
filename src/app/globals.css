@@ -2,6 +2,25 @@
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-playfair);
+  
+  /* Modern warm neutral palette */
+  --color-background: #FAF9F7;
+  --color-foreground: #1A1A1A;
+  --color-muted: #F5F3F0;
+  --color-muted-foreground: #6B6B6B;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1A1A1A;
+  --color-border: #E8E5E0;
+  --color-primary: #1A1A1A;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #F5F3F0;
+  --color-secondary-foreground: #1A1A1A;
+  --color-accent: #D4A574;
+  --color-accent-foreground: #1A1A1A;
+  --color-success: #4A7C59;
+  --color-success-foreground: #FFFFFF;
+  --radius: 0.75rem;
 }
 
 @keyframes fade-in {
@@ -9,6 +28,24 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 @utility animate-fade-in {
   animation: fade-in 0.6s ease-out both;
+}
+
+@utility animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out both;
+}
+
+@utility animate-scale-in {
+  animation: scale-in 0.5s ease-out both;
 }

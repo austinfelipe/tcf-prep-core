@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { UserMenu } from '@/components/ui/UserMenu';
+import { Button } from '@/components/ui/Button';
 
 const NAV_LINKS = [
   { href: '/conjugation', label: 'Conjugation' },
+  { href: '/translation', label: 'Translation' },
   { href: '/adverb', label: 'Adjectives' },
   { href: '/writing', label: 'Writing' },
   { href: '#pricing', label: 'Pricing', isAnchor: true },
@@ -15,23 +17,23 @@ export function LandingHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-10 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link
           href="/"
-          className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+          className="font-serif text-xl font-medium text-foreground hover:opacity-80 transition-opacity"
         >
-          TCF Simulator
+          TCF Prep
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map((link) =>
             link.isAnchor ? (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-medium text-gray-600 hover:text-blue-600 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted"
               >
                 {link.label}
               </a>
@@ -39,19 +41,25 @@ export function LandingHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-medium text-gray-600 hover:text-blue-600 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted"
               >
                 {link.label}
               </Link>
             )
           )}
-          <UserMenu />
         </nav>
+
+        <div className="hidden lg:flex items-center gap-3">
+          <UserMenu />
+          <Link href="/pro">
+            <Button size="sm">Go PRO</Button>
+          </Link>
+        </div>
 
         {/* Mobile hamburger */}
         <button
           onClick={() => setMobileOpen((v) => !v)}
-          className="md:hidden flex h-10 w-10 items-center justify-center rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+          className="lg:hidden flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-muted transition-colors"
           aria-label="Toggle menu"
         >
           {mobileOpen ? (
@@ -68,7 +76,7 @@ export function LandingHeader() {
 
       {/* Mobile menu panel */}
       {mobileOpen && (
-        <nav className="md:hidden border-t border-gray-100 bg-white px-4 pb-4">
+        <nav className="lg:hidden border-t border-border bg-background px-4 pb-4 animate-fade-in">
           <div className="flex flex-col gap-1 py-2">
             {NAV_LINKS.map((link) =>
               link.isAnchor ? (
@@ -76,7 +84,7 @@ export function LandingHeader() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-3 py-2 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-colors"
+                  className="rounded-lg px-4 py-3 font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </a>
@@ -85,15 +93,18 @@ export function LandingHeader() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-3 py-2 font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-colors"
+                  className="rounded-lg px-4 py-3 font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </Link>
               )
             )}
           </div>
-          <div className="border-t border-gray-100 pt-3">
+          <div className="border-t border-border pt-4 flex flex-col gap-3">
             <UserMenu />
+            <Link href="/pro" onClick={() => setMobileOpen(false)}>
+              <Button className="w-full">Go PRO</Button>
+            </Link>
           </div>
         </nav>
       )}

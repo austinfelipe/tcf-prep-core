@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Playfair_Display } from "next/font/google";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import "./globals.css";
 
@@ -8,9 +8,14 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "TCF Prep – French Conjugation & Writing Practice",
-  description: "Master French verb conjugations and practice expression écrite to prepare for the TCF exam",
+  title: "TCF Prep – Master French for the TCF Exam",
+  description: "The complete platform for TCF exam preparation. Practice verb conjugation, written expression, and oral expression with AI-powered feedback.",
 };
 
 export default function RootLayout({
@@ -21,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${geistSans.variable} font-sans antialiased bg-gray-50 text-gray-900 min-h-screen`}
+        className={`${geistSans.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground min-h-screen`}
       >
         <AuthProvider>{children}</AuthProvider>
       </body>

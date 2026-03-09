@@ -5,15 +5,17 @@ interface CardProps {
   className?: string;
   onClick?: () => void;
   hoverable?: boolean;
+  style?: React.CSSProperties;
 }
 
-export function Card({ children, className = '', onClick, hoverable }: CardProps) {
+export function Card({ children, className = '', onClick, hoverable, style }: CardProps) {
   const interactive = onClick || hoverable;
   return (
     <div
       onClick={onClick}
-      className={`rounded-xl border border-gray-200 bg-white p-6 shadow-sm ${
-        interactive ? 'cursor-pointer transition-shadow hover:shadow-md' : ''
+      style={style}
+      className={`rounded-xl border border-border bg-card p-6 shadow-sm ${
+        interactive ? 'cursor-pointer transition-all duration-200 hover:shadow-md hover:-translate-y-0.5' : ''
       } ${className}`}
     >
       {children}
